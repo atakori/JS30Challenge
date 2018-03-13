@@ -65,11 +65,14 @@
       /*//transform the origin to tell the hands where to rotate from (instead of the middle*/
       transform-origin: 100%;
       transform: rotate(90deg);
-      transition: all 0.05s;
+      transition: all 0.2;
       transition-timing-function: cubic-bezier(.48,3.21,.58,1)
     }
     .no-transition {
       transition: none !important;
+    }
+    .border{
+      border: 2px solid yellow;
     }
 
   </style>
@@ -91,7 +94,14 @@
 
       const hour= new Date().getHours();
       const hourDegrees= ((hour/12)*360) +90;
-      
+      // remove transition temporarily to fix bug at 60 seconds
+      if(seconds === 59) {
+        secondHand.classList.add('no-transition')
+      }
+      if (seconds === 1) {
+        secondHand.classList.remove('no-transition')
+      }
+
       //set seconds
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
       //set minutes
