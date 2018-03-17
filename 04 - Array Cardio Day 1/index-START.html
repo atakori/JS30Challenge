@@ -42,13 +42,10 @@
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    const hello = inventors.sort(function(a,b) {
-      if (a.year > b.year) {
-        return 1;
-      } else {
-        return -1;
-      }
-      })
+    const sortByDate= inventors.sort((a,b) => {
+      return a.year - b.year;
+    })
+    console.log(sortByDate);
 
     
     // Array.prototype.reduce()
@@ -93,7 +90,7 @@
       obj[vehicle]++
       return obj
     }, {/*blank object*/})
-    console.log(sumOfInstances);
+    //this is similar to a hashmap
 
   </script>
 </body>
