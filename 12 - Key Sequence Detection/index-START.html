@@ -6,7 +6,21 @@
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+
 <script>
+	const pressed= [];
+	const secretCode= 'sixcha';
+
+	window.addEventListener('keyup', (e) => {
+		pressed.push(e.key);
+		//At max, we are looking for the last couple of letters that make up the secret code. Create splice function to get the correct number of letters starting from the back 
+		pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
+		if(pressed.join('').includes(secretCode)) {
+				console.log('secret unlocked!');
+				cornify_add();
+	}
+		console.log(pressed);
+	})
 </script>
 </body>
 </html>
