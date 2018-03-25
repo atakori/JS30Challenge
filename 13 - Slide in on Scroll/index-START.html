@@ -58,6 +58,30 @@
       };
     }
 
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      //debounce this to say that we will only run the function every x amt of seconds
+      sliderImages.forEach(sliderImage => {
+        //add innerheight so it is slideInAt is counting from the bottom of the window
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+
+        //so we know when to slide them back out once we scroll past it
+        const imageBottom = sliderImage.offsetTop + sliderImage.height
+
+        const isHalfShown= slideInAt > sliderImage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        if(isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
+        }
+      })
+      
+    }
+    window.addEventListener('scroll', debounce(checkSlide));
+
   </script>
 
   <style>
