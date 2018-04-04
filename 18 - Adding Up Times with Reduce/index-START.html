@@ -182,6 +182,32 @@
     </li>
   </ul>
 <script>
+//add all the minutes up and return the total time!
+
+//first using map only
+const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+const seconds = timeNodes
+                  .map(node => node.dataset.time)
+                  .map(timeCode => {
+                    //loop through again and get minutes and seconds
+                    const [mins, secs] = timeCode.split(":").map(parseFloat)
+                    //parseF to convert strings to nums
+                    return (mins * 60) + secs;  
+                  })
+                  //use reduce to get total seconds
+                  .reduce((total, seconds) => {
+                    return (total + seconds);
+                  }, 0)
+
+      let secondsLeft = seconds;
+      const hours = Math.floor(secondsLeft / 3600);
+      //get remainder to determine seconds left again
+      secondsLeft = secondsLeft % 3600;
+      const mins= Math.floor(secondsLeft / 60);
+      secondsLeft = secondsLeft % 60;
+
+console.log(hours, mins, secondsLeft);
+
 </script>
 </body>
 </html>
