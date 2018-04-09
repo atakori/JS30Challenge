@@ -12,6 +12,36 @@
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+  //allow you to see what you are saying it as you are saying it
+  recognition.interimResults= true;
+  //create a new paragraph when you pause
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(e);
+  recognition.addEventListener('results', e=> {
+
+    //take the words out, make an array of them, and join them together
+    const transcript = Array.from(e.results)
+    .map( result => result[0])
+    .map(result => result.transcript)
+    .join('');
+
+    //add text in paragraph and make a new p
+    //if there is a final results from the (e)
+    p.textContent = transcript;
+    if(e.results[0].isFinal) {
+      p= document.createElement('p');
+      words.appendChild(p);
+    }
+  })
+
+  recognition.addEventListener('end', recognition.start);
+
+  recognition.start();
+
+
+
 
 </script>
 
