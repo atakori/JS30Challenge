@@ -58,6 +58,20 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+        // Requires via secure origin (npm start)
+    //select kelometers and arrow
+    const arrow= document.querySelector('.arrow');
+    const speed= document.querySelector('.speed-value');
+
+    //get data from phone's inner navigation (get lat, long, and speed)
+    navigator.geolocation.watchPosition((data) => {
+      //write speed to html
+      speed.textContent = data.coords.speed;
+      //add animation to arrow to reflect direction
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      alert('You need to allow the compass to use your location in order to use this!');
+    })
   </script>
 </body>
 </html>

@@ -26,20 +26,32 @@
     </div>
 
   <script>
-    // Requires via secure origin (npm start)
-    //select kelometers and arrow
-    const arrow= document.querySelector('.arrow');
-    const speed= document.querySelector('.speed-value');
+    //get the things that we want an effect on hover
+    const triggers= document.querySelectorAll('a');
+    //make highlight element in dom 
+    const highlight= document.createElement('span');
+    highlight.classList.add('highlight');
+    document.body.append(highlight);
 
-    //get data from phone's inner navigation (get lat, long, and speed)
-    navigator.geolocation.watchPosition((data) => {
-      //write speed to html
-      speed.textContent = data.coords.speed;
-      //add animation to arrow to reflect direction
-      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
-    }, (err) => {
-      alert('You need to allow the compass to use your location in order to use this!');
-    })
+    function highlightLink() {
+      //determine height and length of the triggered link
+      const linkCoords= this.getBoundingClientRect();
+      
+      //need to take into account the offset amount by the window (if any)
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
+      }
+
+      highlight.style.width = `${coords.width}px`;
+      highlight.style.height = `${coords.height}px`;
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+    }
+
+    //tell on hover, we want the triggers to activate
+    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
 
   </script>
 </body>
