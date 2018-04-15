@@ -54,6 +54,22 @@
   </div>
 
 <script>
+  const nav = document.querySelector('#main');
+  //tells us where the top of the nav is;
+  const topOfNav = nav.offsetTop;
+  function fixNav() {
+    console.log(topOfNav, window.scrollY);
+    if(window.scrollY >= topOfNav) {
+      document.body.style.paddingTop = nav.offsetHeight + 'px';
+      document.body.classList.add('fixed-nav')
+    } else {
+      document.body.style.paddingTop = 0
+      document.body.classList.remove('fixed-nav')
+    }
+  }
+
+  //check to see if nav is at the top of the window. If so, fixNav will fix the bar 
+  window.addEventListener('scroll', fixNav);
 
 </script>
 
