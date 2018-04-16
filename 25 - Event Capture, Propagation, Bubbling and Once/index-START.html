@@ -37,8 +37,29 @@
   }
 </style>
 
-<button></button>
+<button>HI</button>
 <script>
+  const divs= document.querySelectorAll('div');
+
+  const button = document.querySelector('button');
+  function logText(e) {
+    console.log(this.classList.value);
+    e.stopPropagation();
+  }
+
+  divs.forEach( div => {
+    div.addEventListener('click', logText, {
+      capture: false,
+      once: true
+    });
+  })
+
+  button.addEventListener('click', () => {
+    console.log('clicked!');
+  }, {
+    once: true
+  })
+  //due to nesting, bubbling occurs and the click will ripple to everything that the element is contained within
 
 </script>
 </body>
